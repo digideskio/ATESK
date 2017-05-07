@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71825E6B-F683-4615-8F00-4DC97031B1A8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TevelATE</RootNamespace>
+    <AssemblyName>TevelATE</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>ZedGraph\zedgraph_dll_v5.1.5\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllTests\ATETest1.cs" />
+    <Compile Include="ATEForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATEForm.Designer.cs">
+      <DependentUpon>ATEForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllTests\IATETest.cs" />
+    <Compile Include="Email\SendEmail.cs" />
+    <Compile Include="Forms\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataBaseServerSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataBaseServerSettings.Designer.cs">
+      <DependentUpon>DataBaseServerSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DialogMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DialogMessage.Designer.cs">
+      <DependentUpon>DialogMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MySql\MySQLConnector.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsForm\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForm\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForms\CreateUserOperator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForms\CreateUserOperator.Designer.cs">
+      <DependentUpon>CreateUserOperator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForms\EditUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForms\EditUser.Designer.cs">
+      <DependentUpon>EditUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForms\ListUsersOperators.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForms\ListUsersOperators.Designer.cs">
+      <DependentUpon>ListUsersOperators.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\clsRegistry.cs" />
+    <Compile Include="Utils\SerialPortFriendlyName.cs" />
+    <Compile Include="Utils\usersDb.cs" />
+    <Compile Include="ZedGraph\ZedChart.cs" />
+    <EmbeddedResource Include="ATEForm.resx">
+      <DependentUpon>ATEForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataBaseServerSettings.resx">
+      <DependentUpon>DataBaseServerSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DialogMessage.resx">
+      <DependentUpon>DialogMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SettingsForm\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForms\CreateUserOperator.resx">
+      <DependentUpon>CreateUserOperator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForms\EditUser.resx">
+      <DependentUpon>EditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForms\ListUsersOperators.resx">
+      <DependentUpon>ListUsersOperators.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\EPSILOR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\luster.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Clock\Clock.csproj">
+      <Project>{8ee6bed2-3da0-41b5-a76e-dbc9d0042214}</Project>
+      <Name>Clock</Name>
+    </ProjectReference>
+    <ProjectReference Include="SepecialButtons\AquaButton\AquaButton\AquaButton.csproj">
+      <Project>{d627a1ed-ae42-4661-83a7-c186330677fe}</Project>
+      <Name>AquaButton</Name>
+    </ProjectReference>
+    <ProjectReference Include="SepecialButtons\Bulb\Bulb.csproj">
+      <Project>{af81c41b-06e6-4ca5-9fd4-a4e7042f1107}</Project>
+      <Name>Bulb</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\bb-in-case.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
