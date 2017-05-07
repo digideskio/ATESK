@@ -11,14 +11,16 @@ namespace TevelATE
         {
             ATE_STARTED,
             ATE_STOPPED,
-            ATE_ERROR           
+            ATE_ERROR,
+            TEST_STARTED,
+            TEST_STOPPED
         }
         int m_testNum = -1;
         Task m_task;
         public delegate void ATEMsgCallback(ATECBCodes code, string msg, int testnum);
         protected List<Tuple<string, int>> m_datagridHeader = new List<Tuple<string, int>>();
         protected bool m_running = false;
-
+        CancellationTokenSource tokenSource;
         private ATEMsgCallback pCallback;
 
         protected void SendMessage(ATECBCodes code, string msg, int testNum)
@@ -28,17 +30,15 @@ namespace TevelATE
                 pCallback(code, msg, testNum);
             }
         }
-        public static int GetTestCount()
-        {
-            return 1;
-        }
+       
         public abstract string TestName
         {
             get;
         }
-        public IATETest(ATEMsgCallback p)
+        public IATETest(ATEMsgCallback p, int testNum)
         {
             pCallback = p;
+            m_testNum = testNum;
         }        
         public List<Tuple<string, int>>  GetHeader()
         {
@@ -46,13 +46,14 @@ namespace TevelATE
         }
         protected abstract void TaskProcess(CancellationToken ct);
 
-        public virtual string Start(int testNum)
+        public virtual string Start()
         {
-            m_testNum = testNum;
-            var tokenSource = new CancellationTokenSource();
+            tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
 
             m_task = Task.Factory.StartNew(() => TaskProcess(token), token);
+
+            pCallback(ATECBCodes.TEST_STARTED, "", m_testNum);
 
             m_running = true;
             return "ok";
@@ -60,6 +61,11 @@ namespace TevelATE
         public virtual string Stop()
         {
             m_running = false;
+            if (tokenSource != null)
+                tokenSource.Cancel();
+            if (m_task != null)
+                m_task.Wait();
+            pCallback(ATECBCodes.TEST_STOPPED, "", m_testNum);
             return "ok";
         }
         public virtual string Initialize()

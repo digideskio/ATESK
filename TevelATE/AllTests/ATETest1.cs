@@ -10,7 +10,7 @@ namespace TevelATE
     public class ATETest1 : IATETest
     {
         string m_testName = "TEST1";
-        public ATETest1(ATEMsgCallback p) : base(p)
+        public ATETest1(ATEMsgCallback p, int testNum) : base(p, testNum)
         {
             SetDataGridHeader();
         }
@@ -39,9 +39,9 @@ namespace TevelATE
             }                
         }
 
-        public override string Start(int testNum)
+        public override string Start()
         {
-            base.Start(testNum);
+            base.Start();
 
             return "ok";
         }

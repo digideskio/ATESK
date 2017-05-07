@@ -13,24 +13,29 @@ using System.Threading;
 using System.Collections.Concurrent;
 using System.Drawing.Drawing2D;
 using TevelATE.Forms;
+using Bulb;
+using System.Reflection;
+using TevelATE.AllTests;
 
 namespace TevelATE
 {
     public partial class ATEForm : Form
     {
-
+        bool m_ledBlink = false;
         enum GUI_STATE
         {
             STARTED,
             STOPPED
         }
-
+        List<DataGridView> m_dataGridView = new List<DataGridView>();
         Task m_task;
+        Thread m_ledBlinkThread;
         CancellationTokenSource tokenSource;
         bool m_running = false;
-        List<IATETest> m_test = new List<IATETest>();
+        TestHandler m_tHandler;
         AutoResetEvent m_event = new AutoResetEvent(false);
-        
+        List<LedBulb> m_leds = new List<LedBulb>(); 
+
         struct MsgType
         {
             public ATECBCodes code;
@@ -54,52 +59,105 @@ namespace TevelATE
         void Initialize()
         {
             ATEMsgCallback p = new ATEMsgCallback(HostMsgCallback);
-            m_test.Add(new ATETest1(p));
+            m_tHandler = new TestHandler(p);
             InitializeGui();
             InitializeDataGrid();
+
+            txtSerialNumber.Text = "1";
+            txtPartNumber.Text = "1";
         }
         void InitializeGui()
         {
-             
+
+            m_leds.Add(led1);
+            m_leds.Add(led2);
+            m_leds.Add(led3);
+            m_leds.Add(led4);
+            m_leds.Add(led5);
+
+            for (int i = 0; i < TestHandler.GetTestCount(); i++)
+            {
+                //m_dataGridView.Add(dataGridView1);
+                m_dataGridView.Add(CreateDataGridForTests(i));
+
+                
+            }
         }
+ 
         void InitializeDataGrid()
         {
-            DataGridView[] d = { dataGridView1 };
-
-            foreach (IATETest test in m_test)
+             
+            int j = 0;
+            List<IATETest> tests = m_tHandler.GetTests();
+            foreach (IATETest test in tests)
             {
+                DataGridView d = m_dataGridView[j];
                 List<Tuple<string, int>> header = test.GetHeader();
-                d[0].ColumnCount = header.Count;
+                d.ColumnCount = header.Count;
                 for (int i = 0; i < header.Count; i++)
                 {
-                    d[0].Columns[i].Name = header[i].Item1;
-                    d[0].Columns[i].Width = header[i].Item2;
+                    d.Columns[i].Name = header[i].Item1;
+                    d.Columns[i].Width = header[i].Item2;
                 }
+                d.Invalidate();
+                j++;
+            } 
+        }
+        string CheckStartConditions()
+        {
+            if (txtPartNumber.Text == string.Empty)
+            {
+                return "Part number is missing";
             }
+
+            if (txtSerialNumber.Text == string.Empty)
+            {
+                return "Serial number is missing";
+            }
+
+            return "ok";
         }
         string Start()
         {
-            if (m_running == false)
+            lock (this)
             {
-                StartMsgHandler();
-                return "pending";
-            } else
-            {
-                return "in process";
+                string r = string.Empty;
+                if (m_running == false)
+                {
+                    if ((r = CheckStartConditions()) != "ok")
+                    {
+                        ShowDialogMessage(r);
+                        return "error on start";
+                    }
+                    StartMsgHandler();
+                    m_tHandler.Start();
+                    return "pending";
+                }
+                else
+                {
+                    return "in process";
+                }
             }
         }
         string Stop()
         {
-            if (m_running == false)
-            {                                
-                m_event.Set();
-                tokenSource.Cancel();
-                m_task.Wait();
-                return "ok";
-            } 
-            else
+            lock (this)
             {
-                return "stopped";
+                if (m_running == true)
+                {
+                    m_tHandler.Stop();
+                    m_event.Set();
+                    if (tokenSource != null)
+                        tokenSource.Cancel();
+                    m_task.Wait();
+                    StopBlinkLed();
+                    GuiState(GUI_STATE.STOPPED);
+                    return "ok";
+                }
+                else
+                {
+                    return "stopped";
+                }
             }
         }
         string Pause()
@@ -109,6 +167,8 @@ namespace TevelATE
 
         void StartMsgHandler()
         {
+            if (m_task != null)
+                m_task.Wait();
             tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
           
@@ -131,14 +191,20 @@ namespace TevelATE
             {
                 case GUI_STATE.STARTED:
                 {
-                    //btnStart.Enabled = false;
+                    m_running = true;
+                    btnStart.BackColor = Color.LightGreen;
+                    btnStart.Enabled = false;
+                    btnStop.Enabled = true;
                 }
                 break;
                 case GUI_STATE.STOPPED:
                 {
-                    //btnStart.Enabled = true;
+                   btnStart.BackColor = Color.White;
+                   btnStart.Enabled = true;
+                   btnStop.Enabled = false;
+                   m_running = false;                        
                 }
-                break;
+                break;                
             }
         }
         void HostMsgProcessing(CancellationToken ct)
@@ -146,8 +212,9 @@ namespace TevelATE
             MsgType msgType;
             while (ct.IsCancellationRequested == false)
             {
-                m_event.WaitOne();
-                if (ct.IsCancellationRequested == true)
+                if (m_msgQueue.Count == 0)
+                    m_event.WaitOne();
+                if (ct.IsCancellationRequested == true && m_msgQueue.Count == 0)
                     return;
                 if (m_msgQueue.TryDequeue(out msgType) == false)
                     continue;
@@ -157,7 +224,6 @@ namespace TevelATE
 
                     case ATECBCodes.ATE_STARTED:
                     {
-                        m_running = true;
                         GuiState(GUI_STATE.STARTED);
                     }
                     break;
@@ -171,12 +237,22 @@ namespace TevelATE
 
                     }
                     break;
+                    case ATECBCodes.TEST_STARTED:
+                    {
+                        StartBlinkLed(msgType.testnum);
+                    }
+                    break;
+                    case ATECBCodes.TEST_STOPPED:
+                    {
+                        StopBlinkLed();
+                    }
+                    break;
                 }
             }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
-        {
+        {            
             Start();
         }
 
@@ -188,6 +264,49 @@ namespace TevelATE
         {
             DialogMessage d = new DialogMessage(l1, l2);
             d.ShowDialog();
+        }
+        void BlinkLed(int testNum)
+        {
+          
+            while (m_ledBlink)
+            {
+                m_leds[testNum].On = !m_leds[testNum].On;
+                Thread.Sleep(800);
+            }
+        }
+
+        void StopBlinkLed()
+        {
+            m_ledBlink = false;
+            if (m_ledBlinkThread != null)
+                m_ledBlinkThread.Join();
+        }
+
+        void StartBlinkLed(int testNum)
+        {
+            if (m_ledBlinkThread == null || m_ledBlinkThread.IsAlive == false)
+            {
+                m_ledBlink = true;
+                m_ledBlinkThread = new Thread(() => BlinkLed(testNum - 1));
+                m_ledBlinkThread.Start();
+            }            
+        }
+        DataGridView CreateDataGridForTests(int i)
+        {
+          
+            DataGridView dg = new DataGridView();
+
+            dg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dg.Location = new System.Drawing.Point(244, 188);
+            dg.Name = "dataGridView" + i;
+            dg.Size = new System.Drawing.Size(960, 661);
+            dg.TabIndex = 30;
+            this.Controls.Add(dg);
+
+            return dg;
         }
         private void ATEForm_FormClosing(object sender, FormClosingEventArgs e)
         {

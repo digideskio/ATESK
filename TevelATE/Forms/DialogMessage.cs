@@ -18,5 +18,10 @@ namespace TevelATE.Forms
             label2.Text = l2;
             label1.Text = l1;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

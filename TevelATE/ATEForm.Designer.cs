@@ -38,14 +38,19 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.aquaButton1 = new QA.Controls.AquaButton();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ledBulb4 = new Bulb.LedBulb();
-            this.ledBulb3 = new Bulb.LedBulb();
             this.ledBulb2 = new Bulb.LedBulb();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.ledBulb1 = new Bulb.LedBulb();
-            this.ledBulb13 = new Bulb.LedBulb();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.led5 = new Bulb.LedBulb();
+            this.led4 = new Bulb.LedBulb();
+            this.led3 = new Bulb.LedBulb();
+            this.led2 = new Bulb.LedBulb();
+            this.led1 = new Bulb.LedBulb();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -57,7 +62,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.clockControl1 = new Clock.ClockControl();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
@@ -68,7 +72,6 @@
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -165,23 +168,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.panel1.Controls.Add(this.aquaButton1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(219, 25);
             this.panel1.TabIndex = 0;
-            // 
-            // aquaButton1
-            // 
-            this.aquaButton1.ButtonColour = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(219)))), ((int)(((byte)(29)))));
-            this.aquaButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.aquaButton1.FontSize = 8.25F;
-            this.aquaButton1.Location = new System.Drawing.Point(0, 0);
-            this.aquaButton1.Name = "aquaButton1";
-            this.aquaButton1.Size = new System.Drawing.Size(150, 150);
-            this.aquaButton1.TabIndex = 1;
-            this.aquaButton1.TextColour = System.Drawing.Color.Black;
             // 
             // label1
             // 
@@ -196,11 +187,17 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.ledBulb4);
-            this.groupBox2.Controls.Add(this.ledBulb3);
             this.groupBox2.Controls.Add(this.ledBulb2);
+            this.groupBox2.Controls.Add(this.checkBox7);
+            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.ledBulb1);
-            this.groupBox2.Controls.Add(this.ledBulb13);
+            this.groupBox2.Controls.Add(this.checkBox6);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.led5);
+            this.groupBox2.Controls.Add(this.led4);
+            this.groupBox2.Controls.Add(this.led3);
+            this.groupBox2.Controls.Add(this.led2);
+            this.groupBox2.Controls.Add(this.led1);
             this.groupBox2.Controls.Add(this.checkBox5);
             this.groupBox2.Controls.Add(this.checkBox4);
             this.groupBox2.Controls.Add(this.checkBox3);
@@ -218,55 +215,111 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tests:";
             // 
-            // ledBulb4
-            // 
-            this.ledBulb4.Color = System.Drawing.Color.Lime;
-            this.ledBulb4.Location = new System.Drawing.Point(108, 129);
-            this.ledBulb4.Name = "ledBulb4";
-            this.ledBulb4.On = true;
-            this.ledBulb4.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.ledBulb4.Size = new System.Drawing.Size(33, 28);
-            this.ledBulb4.TabIndex = 27;
-            // 
-            // ledBulb3
-            // 
-            this.ledBulb3.Color = System.Drawing.Color.Red;
-            this.ledBulb3.Location = new System.Drawing.Point(108, 102);
-            this.ledBulb3.Name = "ledBulb3";
-            this.ledBulb3.On = true;
-            this.ledBulb3.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.ledBulb3.Size = new System.Drawing.Size(33, 28);
-            this.ledBulb3.TabIndex = 26;
-            // 
             // ledBulb2
             // 
-            this.ledBulb2.Color = System.Drawing.Color.Red;
-            this.ledBulb2.Location = new System.Drawing.Point(108, 73);
+            this.ledBulb2.Color = System.Drawing.Color.Lime;
+            this.ledBulb2.Location = new System.Drawing.Point(108, 186);
             this.ledBulb2.Name = "ledBulb2";
             this.ledBulb2.On = true;
             this.ledBulb2.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.ledBulb2.Size = new System.Drawing.Size(33, 28);
-            this.ledBulb2.TabIndex = 25;
+            this.ledBulb2.TabIndex = 33;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(7, 192);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(15, 14);
+            this.checkBox7.TabIndex = 32;
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(41, 193);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(37, 13);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "Test 5";
             // 
             // ledBulb1
             // 
             this.ledBulb1.Color = System.Drawing.Color.Lime;
-            this.ledBulb1.Location = new System.Drawing.Point(108, 44);
+            this.ledBulb1.Location = new System.Drawing.Point(108, 158);
             this.ledBulb1.Name = "ledBulb1";
             this.ledBulb1.On = true;
             this.ledBulb1.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.ledBulb1.Size = new System.Drawing.Size(33, 28);
-            this.ledBulb1.TabIndex = 24;
+            this.ledBulb1.TabIndex = 30;
             // 
-            // ledBulb13
+            // checkBox6
             // 
-            this.ledBulb13.Color = System.Drawing.Color.Lime;
-            this.ledBulb13.Location = new System.Drawing.Point(108, 15);
-            this.ledBulb13.Name = "ledBulb13";
-            this.ledBulb13.On = true;
-            this.ledBulb13.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.ledBulb13.Size = new System.Drawing.Size(33, 28);
-            this.ledBulb13.TabIndex = 23;
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(7, 164);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(15, 14);
+            this.checkBox6.TabIndex = 29;
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(41, 165);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 13);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Test 5";
+            // 
+            // led5
+            // 
+            this.led5.Color = System.Drawing.Color.Lime;
+            this.led5.Location = new System.Drawing.Point(108, 129);
+            this.led5.Name = "led5";
+            this.led5.On = true;
+            this.led5.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.led5.Size = new System.Drawing.Size(33, 28);
+            this.led5.TabIndex = 27;
+            // 
+            // led4
+            // 
+            this.led4.Color = System.Drawing.Color.Red;
+            this.led4.Location = new System.Drawing.Point(108, 102);
+            this.led4.Name = "led4";
+            this.led4.On = true;
+            this.led4.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.led4.Size = new System.Drawing.Size(33, 28);
+            this.led4.TabIndex = 26;
+            // 
+            // led3
+            // 
+            this.led3.Color = System.Drawing.Color.Red;
+            this.led3.Location = new System.Drawing.Point(108, 73);
+            this.led3.Name = "led3";
+            this.led3.On = true;
+            this.led3.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.led3.Size = new System.Drawing.Size(33, 28);
+            this.led3.TabIndex = 25;
+            // 
+            // led2
+            // 
+            this.led2.Color = System.Drawing.Color.Lime;
+            this.led2.Location = new System.Drawing.Point(108, 44);
+            this.led2.Name = "led2";
+            this.led2.On = true;
+            this.led2.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.led2.Size = new System.Drawing.Size(33, 28);
+            this.led2.TabIndex = 24;
+            // 
+            // led1
+            // 
+            this.led1.Color = System.Drawing.Color.Lime;
+            this.led1.Location = new System.Drawing.Point(108, 15);
+            this.led1.Name = "led1";
+            this.led1.On = true;
+            this.led1.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.led1.Size = new System.Drawing.Size(33, 28);
+            this.led1.TabIndex = 23;
             // 
             // checkBox5
             // 
@@ -368,17 +421,6 @@
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(244, 188);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(956, 659);
-            this.dataGridView1.TabIndex = 26;
-            // 
             // clockControl1
             // 
             this.clockControl1.BackColor = System.Drawing.Color.Black;
@@ -419,7 +461,6 @@
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.clockControl1);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -443,7 +484,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -471,18 +511,22 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
-        private QA.Controls.AquaButton aquaButton1;
+        private System.Windows.Forms.Label label8;        
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Bulb.LedBulb ledBulb13;
-        private Bulb.LedBulb ledBulb2;
-        private Bulb.LedBulb ledBulb1;
-        private Bulb.LedBulb ledBulb4;
-        private Bulb.LedBulb ledBulb3;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private Bulb.LedBulb led1;
+        private Bulb.LedBulb led3;
+        private Bulb.LedBulb led2;
+        private Bulb.LedBulb led5;
+        private Bulb.LedBulb led4;
         private Clock.ClockControl clockControl1;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
+        private Bulb.LedBulb ledBulb2;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.Label label11;
+        private Bulb.LedBulb ledBulb1;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.Label label10;
     }
 }
 
