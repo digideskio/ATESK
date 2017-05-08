@@ -16,6 +16,8 @@ using TevelATE.Forms;
 using Bulb;
 using System.Reflection;
 using TevelATE.AllTests;
+using static Clock.ClockControl;
+using TevelATE.GuiHelper;
 
 namespace TevelATE
 {
@@ -74,14 +76,14 @@ namespace TevelATE
             m_leds.Add(led3);
             m_leds.Add(led4);
             m_leds.Add(led5);
+            m_leds.Add(led6);
+            m_leds.Add(led5);
 
             for (int i = 0; i < TestHandler.GetTestCount(); i++)
             {
-                //m_dataGridView.Add(dataGridView1);
-                m_dataGridView.Add(CreateDataGridForTests(i));
-
-                
+                m_dataGridView.Add(CreateDataGridForTests(i));                
             }
+            GuiDataGridHelper.SetGrids(m_dataGridView);
         }
  
         void InitializeDataGrid()
@@ -117,6 +119,10 @@ namespace TevelATE
 
             return "ok";
         }
+        void PrepareStart()
+        {
+            GuiDataGridHelper.ClearAll();
+        }
         string Start()
         {
             lock (this)
@@ -129,6 +135,7 @@ namespace TevelATE
                         ShowDialogMessage(r);
                         return "error on start";
                     }
+                    PrepareStart();
                     StartMsgHandler();
                     m_tHandler.Start();
                     return "pending";
@@ -195,6 +202,7 @@ namespace TevelATE
                     btnStart.BackColor = Color.LightGreen;
                     btnStart.Enabled = false;
                     btnStop.Enabled = true;
+                    clockControl1.Start();
                 }
                 break;
                 case GUI_STATE.STOPPED:
@@ -202,7 +210,8 @@ namespace TevelATE
                    btnStart.BackColor = Color.White;
                    btnStart.Enabled = true;
                    btnStop.Enabled = false;
-                   m_running = false;                        
+                   m_running = false;
+                   clockControl1.Stop();
                 }
                 break;                
             }
@@ -237,14 +246,27 @@ namespace TevelATE
 
                     }
                     break;
-                    case ATECBCodes.TEST_STARTED:
+                    case ATECBCodes.ATE_TEST_STARTED:
                     {
                         StartBlinkLed(msgType.testnum);
                     }
                     break;
-                    case ATECBCodes.TEST_STOPPED:
+                    case ATECBCodes.ATE_TEST_STOPPED:
                     {
                         StopBlinkLed();
+                    }
+                    break;
+                    case ATECBCodes.ATE_DATA:
+                    {
+                        string[] sdata = msgType.msg.Split(new Char[] { ',' });
+                        GuiDataGridHelper.UpdateDataGridWith(sdata, msgType.testnum);
+                    }
+                    break;
+                    case ATECBCodes.ATE_COLOR_DATA:
+                    {
+                        
+                        string[] sdata = msgType.msg.Split(new Char[] { ',' });
+                        GuiDataGridHelper.UpdateColorGridWith(sdata, msgType.testnum);
                     }
                     break;
                 }
@@ -315,6 +337,58 @@ namespace TevelATE
                 ShowDialogMessage("Still running");
                 return;
             }
+        }
+
+        void ShowDataGrid(int num)
+        {
+
+            int i = 1;
+            foreach (DataGridView d in m_dataGridView)
+            {
+                if (num == i)
+                {
+                    d.Visible = true;
+                }
+                else
+                {
+                    d.Visible = false;
+                }
+                i++;
+            }
+        }
+        private void led1_Click(object sender, EventArgs e)
+        {
+            ShowDataGrid(1);
+        }
+
+        private void led2_Click(object sender, EventArgs e)
+        {
+            ShowDataGrid(2);
+        }
+
+        private void led3_Click(object sender, EventArgs e)
+        {
+            ShowDataGrid(3);
+        }
+
+        private void led4_Click(object sender, EventArgs e)
+        {
+            ShowDataGrid(4);
+        }
+
+        private void led5_Click(object sender, EventArgs e)
+        {
+            ShowDataGrid(5);
+        }
+
+        private void led6_Click(object sender, EventArgs e)
+        {
+            ShowDataGrid(6);
+        }
+
+        private void led7_Click(object sender, EventArgs e)
+        {
+            ShowDataGrid(7);
         }
     }
 }

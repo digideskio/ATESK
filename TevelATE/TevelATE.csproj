@@ -54,6 +54,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllTests\ATETest4.cs" />
+    <Compile Include="AllTests\ATETest3.cs" />
+    <Compile Include="AllTests\ATETest2.cs" />
     <Compile Include="AllTests\ATETest1.cs" />
     <Compile Include="AllTests\TestHandler.cs" />
     <Compile Include="ATEForm.cs">
@@ -82,6 +85,7 @@
     <Compile Include="Forms\DialogMessage.Designer.cs">
       <DependentUpon>DialogMessage.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuiHelper\GuiHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -28,66 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.sevenSegmentArray1 = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentArray2 = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentArray3 = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ssSec = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.ssMin = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.ssHour = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.SuspendLayout();
-            // 
-            // sevenSegmentArray1
-            // 
-            this.sevenSegmentArray1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sevenSegmentArray1.ArrayCount = 2;
-            this.sevenSegmentArray1.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentArray1.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sevenSegmentArray1.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentArray1.DecimalShow = true;
-            this.sevenSegmentArray1.ElementPadding = new System.Windows.Forms.Padding(6, 4, 4, 4);
-            this.sevenSegmentArray1.ElementWidth = 10;
-            this.sevenSegmentArray1.ItalicFactor = -0.1F;
-            this.sevenSegmentArray1.Location = new System.Drawing.Point(2, 1);
-            this.sevenSegmentArray1.Name = "sevenSegmentArray1";
-            this.sevenSegmentArray1.Size = new System.Drawing.Size(57, 39);
-            this.sevenSegmentArray1.TabIndex = 9;
-            this.sevenSegmentArray1.TabStop = false;
-            this.sevenSegmentArray1.Value = "00";
-            // 
-            // sevenSegmentArray2
-            // 
-            this.sevenSegmentArray2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sevenSegmentArray2.ArrayCount = 2;
-            this.sevenSegmentArray2.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentArray2.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sevenSegmentArray2.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentArray2.DecimalShow = true;
-            this.sevenSegmentArray2.ElementPadding = new System.Windows.Forms.Padding(6, 4, 4, 4);
-            this.sevenSegmentArray2.ElementWidth = 10;
-            this.sevenSegmentArray2.ItalicFactor = -0.1F;
-            this.sevenSegmentArray2.Location = new System.Drawing.Point(76, 0);
-            this.sevenSegmentArray2.Name = "sevenSegmentArray2";
-            this.sevenSegmentArray2.Size = new System.Drawing.Size(57, 39);
-            this.sevenSegmentArray2.TabIndex = 10;
-            this.sevenSegmentArray2.TabStop = false;
-            this.sevenSegmentArray2.Value = "00";
-            // 
-            // sevenSegmentArray3
-            // 
-            this.sevenSegmentArray3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sevenSegmentArray3.ArrayCount = 2;
-            this.sevenSegmentArray3.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentArray3.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sevenSegmentArray3.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentArray3.DecimalShow = true;
-            this.sevenSegmentArray3.ElementPadding = new System.Windows.Forms.Padding(6, 4, 4, 4);
-            this.sevenSegmentArray3.ElementWidth = 10;
-            this.sevenSegmentArray3.ItalicFactor = -0.1F;
-            this.sevenSegmentArray3.Location = new System.Drawing.Point(148, 1);
-            this.sevenSegmentArray3.Name = "sevenSegmentArray3";
-            this.sevenSegmentArray3.Size = new System.Drawing.Size(57, 39);
-            this.sevenSegmentArray3.TabIndex = 11;
-            this.sevenSegmentArray3.TabStop = false;
-            this.sevenSegmentArray3.Value = "00";
             // 
             // textBox1
             // 
@@ -113,16 +59,70 @@
             this.textBox2.TabIndex = 13;
             this.textBox2.Text = ":";
             // 
+            // ssSec
+            // 
+            this.ssSec.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ssSec.ArrayCount = 2;
+            this.ssSec.ColorBackground = System.Drawing.Color.Black;
+            this.ssSec.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ssSec.ColorLight = System.Drawing.Color.Red;
+            this.ssSec.DecimalShow = true;
+            this.ssSec.ElementPadding = new System.Windows.Forms.Padding(6, 4, 4, 4);
+            this.ssSec.ElementWidth = 10;
+            this.ssSec.ItalicFactor = -0.1F;
+            this.ssSec.Location = new System.Drawing.Point(148, 1);
+            this.ssSec.Name = "ssSec";
+            this.ssSec.Size = new System.Drawing.Size(57, 39);
+            this.ssSec.TabIndex = 11;
+            this.ssSec.TabStop = false;
+            this.ssSec.Value = "00";
+            // 
+            // ssMin
+            // 
+            this.ssMin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ssMin.ArrayCount = 2;
+            this.ssMin.ColorBackground = System.Drawing.Color.Black;
+            this.ssMin.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ssMin.ColorLight = System.Drawing.Color.Red;
+            this.ssMin.DecimalShow = true;
+            this.ssMin.ElementPadding = new System.Windows.Forms.Padding(6, 4, 4, 4);
+            this.ssMin.ElementWidth = 10;
+            this.ssMin.ItalicFactor = -0.1F;
+            this.ssMin.Location = new System.Drawing.Point(76, 0);
+            this.ssMin.Name = "ssMin";
+            this.ssMin.Size = new System.Drawing.Size(57, 39);
+            this.ssMin.TabIndex = 10;
+            this.ssMin.TabStop = false;
+            this.ssMin.Value = "00";
+            // 
+            // ssHour
+            // 
+            this.ssHour.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ssHour.ArrayCount = 2;
+            this.ssHour.ColorBackground = System.Drawing.Color.Black;
+            this.ssHour.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ssHour.ColorLight = System.Drawing.Color.Red;
+            this.ssHour.DecimalShow = true;
+            this.ssHour.ElementPadding = new System.Windows.Forms.Padding(6, 4, 4, 4);
+            this.ssHour.ElementWidth = 10;
+            this.ssHour.ItalicFactor = -0.1F;
+            this.ssHour.Location = new System.Drawing.Point(2, 1);
+            this.ssHour.Name = "ssHour";
+            this.ssHour.Size = new System.Drawing.Size(57, 39);
+            this.ssHour.TabIndex = 9;
+            this.ssHour.TabStop = false;
+            this.ssHour.Value = "00";
+            // 
             // ClockControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.ssSec);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.sevenSegmentArray3);
-            this.Controls.Add(this.sevenSegmentArray2);
-            this.Controls.Add(this.sevenSegmentArray1);
+            this.Controls.Add(this.ssMin);
+            this.Controls.Add(this.ssHour);
             this.Name = "ClockControl";
             this.Size = new System.Drawing.Size(220, 43);
             this.ResumeLayout(false);
@@ -132,9 +132,9 @@
 
         #endregion
 
-        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentArray1;
-        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentArray2;
-        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentArray3;
+        private DmitryBrant.CustomControls.SevenSegmentArray ssHour;
+        private DmitryBrant.CustomControls.SevenSegmentArray ssMin;
+        private DmitryBrant.CustomControls.SevenSegmentArray ssSec;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
     }

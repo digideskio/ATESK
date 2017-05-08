@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -8,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace TevelATE
 {
-    public class ATETest1 : IATETest
+    public class ATETest2 : IATETest
     {
-        string m_testName = "TEST1";
-        public ATETest1(ATEMsgCallback p, int testNum) : base(p, testNum)
+        string m_testName = "TEST2";
+        public ATETest2(ATEMsgCallback p, int testNum) : base(p, testNum)
         {
             SetDataGridHeader();
         }
@@ -31,18 +30,11 @@ namespace TevelATE
             m_datagridHeader.Add(new Tuple<string, int>("voltage4", width));
             m_datagridHeader.Add(new Tuple<string, int>("PassFail", width));
         }
-        public string CTS(Color color)
-        {
-            return color.R + ":" + color.G + ":" + color.B + ":" + color.A;
-        }
         protected override void TaskProcess(CancellationToken ct)
         {
             while (ct.IsCancellationRequested == false)
             {
-                SendMessage(ATECBCodes.ATE_DATA, "3.2, 4.2 , 1.8 , 10.121, PASS");
-                string[] colors = { CTS(Color.Green), CTS(Color.Red), CTS(Color.Green), CTS(Color.Orange), CTS(Color.Red)};
-                var result = string.Join(",", colors);
-                SendMessage(ATECBCodes.ATE_COLOR_DATA, result);
+
                 Thread.Sleep(1000);
             }                
         }

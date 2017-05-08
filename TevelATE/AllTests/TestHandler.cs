@@ -13,17 +13,18 @@ namespace TevelATE.AllTests
     {
         
         List<IATETest> m_test = new List<IATETest>();
-        private  const int m_testCount = 1;
+        private  const int m_testCount = 4;
 
         ATEMsgCallback pCallback;
 
         public TestHandler(ATEMsgCallback p)
         {
             pCallback = p;
-            for (int i = 0; i < m_testCount; i++)
-            {
-                m_test.Add(new ATETest1(p, i + 1));
-            }
+            m_test.Add(new ATETest1(p, 1));
+            m_test.Add(new ATETest2(p, 1));
+            m_test.Add(new ATETest3(p, 1));
+            m_test.Add(new ATETest4(p, 1));
+
         }
 
         public List<IATETest> GetTests()

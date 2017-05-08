@@ -12,8 +12,10 @@ namespace TevelATE
             ATE_STARTED,
             ATE_STOPPED,
             ATE_ERROR,
-            TEST_STARTED,
-            TEST_STOPPED
+            ATE_TEST_STARTED,
+            ATE_TEST_STOPPED,
+            ATE_DATA,
+            ATE_COLOR_DATA
         }
         int m_testNum = -1;
         Task m_task;
@@ -23,11 +25,11 @@ namespace TevelATE
         CancellationTokenSource tokenSource;
         private ATEMsgCallback pCallback;
 
-        protected void SendMessage(ATECBCodes code, string msg, int testNum)
+        protected void SendMessage(ATECBCodes code, string msg)
         {
             if (pCallback != null)
             {
-                pCallback(code, msg, testNum);
+                pCallback(code, msg, m_testNum);
             }
         }
        
@@ -53,7 +55,7 @@ namespace TevelATE
 
             m_task = Task.Factory.StartNew(() => TaskProcess(token), token);
 
-            pCallback(ATECBCodes.TEST_STARTED, "", m_testNum);
+            pCallback(ATECBCodes.ATE_TEST_STARTED, "", m_testNum);
 
             m_running = true;
             return "ok";
@@ -65,7 +67,7 @@ namespace TevelATE
                 tokenSource.Cancel();
             if (m_task != null)
                 m_task.Wait();
-            pCallback(ATECBCodes.TEST_STOPPED, "", m_testNum);
+            pCallback(ATECBCodes.ATE_TEST_STOPPED, "", m_testNum);
             return "ok";
         }
         public virtual string Initialize()
